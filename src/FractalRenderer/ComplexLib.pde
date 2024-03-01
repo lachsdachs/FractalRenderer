@@ -12,6 +12,8 @@
  Conjugates
  Polar coordinates
  Square roots
+
+ Written by lachsdachs.
 */
 
 
