@@ -1,5 +1,5 @@
 /*
- ComplexLib is a simple library for working with complex numbers in Processing Java.
+ ComplexLib is a simple library for working with complex numbers in Java.
  It currently implements the following operators and functions:
  
  Addition
@@ -18,81 +18,80 @@
 
 
 //base class representing complex numbers. Implements some operators/functions for convenience.
-class Complex {
-  double r; //real part
-  double i; //imaginary part
+public class Complex {
+  public double r; //real part
+  public double i; //imaginary part
 
-  Complex(double r_, double i_) {
+  public Complex(double r_, double i_) {
     r = r_;
     i = i_;
   }
 
   //get real dude, smh rn
-  double getReal() {
+  public double getReal() {
     return r;
   }
 
-  double getImaginary() {
+  public double getImaginary() {
     return i;
   }
 
-  double getMagnitude() {
+  public double getMagnitude() {
     return Math.sqrt( r*r + i*i );
   }
 
-  boolean equals(Complex c) {
+  public boolean equals(Complex c) {
     return r == c.r && i == c.i;
   }
 
-  String toString() {
+  public String toString() {
     return "("+r+" + "+i+"i)";
   }
 
   //literally no idea if this even works, no time to test it
-  void normalize() {
+  public void normalize() {
     r /= getMagnitude();
     i /= getMagnitude();
   }
 
-  void add(Complex c) {
+  public void add(Complex c) {
     r += c.r;
     i += c.i;
   }
 
-  void subtract(Complex c) {
+  public void subtract(Complex c) {
     r -= c.r;
     i -= c.i;
   }
 
-  void multiply(double a) {
+  public void multiply(double a) {
     r *= a;
     i *= a;
   }
 
-  void multiply(Complex c) {
+  public void multiply(Complex c) {
     r = r * c.r - i * c.i;
     i = r * c.i + i * c.r;
   }
 
-  double getPhase() {
+  public double getPhase() {
     return Math.atan2(r, i);
   }
 
-  Complex getConjugate() {
+  public Complex getConjugate() {
     return complex(r, -i);
   }
-
-  //from complexnumbers211235857.wordpress.com/2020/08/03/multiplicative-inverse-and-reciprocal-of-a-complex-number
-  Complex getReciprocal() {
+
+  public Complex getReciprocal() {
     double s = r*r + i*i;
     return complex(r/s, -i/s);
   }
   
-  void square() {
+  public void square() {
     multiply(complex(r, i));
   }
 
-  void raise(int exponent) {
+  public void raise(int exponent) {
     if (exponent < 0) {
       println("WARNING: ComplexLib: Exponentiation with a negative exponent is not supported and always yields 0r + 0i");
       r = 0;
@@ -113,48 +112,47 @@ class Complex {
 
 
 
-final Complex cZero = new Complex(0, 0);
+public final Complex cZero = new Complex(0, 0);
 
-boolean cEquals(Complex a, Complex b) {
+public boolean cEquals(Complex a, Complex b) {
   return a.r == b.r && a.i == b.i;
 }
 
-String cToString(Complex c) {
+public String cToString(Complex c) {
   return c.toString();
 }
 
 //shorthand for "new Complex()"
-Complex complex(double r, double i) {
+public Complex complex(double r, double i) {
   return new Complex(r, i);
 }
 
 //useful when you want to do things like adding a real number to a complex number even though there is no function that explicitly supports it
-Complex complex(double r) {
+public Complex complex(double r) {
   return complex(r, 0);
 }
 
-double cPhase(Complex input) {
+public double cPhase(Complex input) {
   return Math.atan2(input.r, input.i);
 }
 
-Complex cConjugate(Complex c) {
+public Complex cConjugate(Complex c) {
   return c.getConjugate();
 }
 
-Complex cReciprocal(Complex c) {
+public Complex cReciprocal(Complex c) {
   return c.getReciprocal();
 }
 
-Complex cAdd(Complex a, Complex b) {
+public Complex cAdd(Complex a, Complex b) {
   return complex(a.r+b.r, a.i+b.i);
 }
-
-//same shit again but with three (convenience)
-Complex cAdd(Complex a, Complex b, Complex c) {
+
+public Complex cAdd(Complex a, Complex b, Complex c) {
   return complex(a.r+b.r+c.r, a.i+b.i+c.i);
 }
 
-Complex cSum(Complex[] input) {
+public Complex cSum(Complex[] input) {
   double rSum = 0;
   double iSum = 0;
   for (int i = 0; i < input.length; i++) {
@@ -165,38 +163,38 @@ Complex cSum(Complex[] input) {
   return output;
 }
 
-Complex cSubtract(Complex a, Complex b) {
+public Complex cSubtract(Complex a, Complex b) {
   return complex(a.r-b.r, a.i-b.i);
 }
 
-Complex cMultiply(Complex c, double alpha) {
+public Complex cMultiply(Complex c, double alpha) {
   return complex(c.r*alpha, c.i*alpha);
 }
 
-Complex cMultiply(double alpha, Complex c) {
+public Complex cMultiply(double alpha, Complex c) {
   return complex(c.r*alpha, c.i*alpha);
 }
 
-Complex cMultiply(Complex a, Complex b) {
+public Complex cMultiply(Complex a, Complex b) {
   double r = a.r * b.r - a.i * b.i;
   double i = a.r * b.i + a.i * b.r;
   return complex(r, i);
 }
 
-Complex cDivide(Complex a, double b) {
+public Complex cDivide(Complex a, double b) {
   return complex(a.r/b, a.i/b);
 }
 
-Complex cDivide(Complex a, Complex b) {
+public Complex cDivide(Complex a, Complex b) {
   return cMultiply(a, cReciprocal(b));
 }
 
-Complex cSquare(Complex input) {
+public Complex cSquare(Complex input) {
   return cMultiply(input, input);
 }
 
-//can only do exponentiation with a natural exponent. TESTME
-Complex cRaise(Complex base, int exponent) {
+//can only do exponentiation with a natural exponent.
+public Complex cRaise(Complex base, int exponent) {
   if (exponent < 0) {
     println("WARNING: ComplexLib: Exponentiation with a negative exponent is not supported and always yields 0r + 0i");
     return cZero;
@@ -214,14 +212,14 @@ Complex cRaise(Complex base, int exponent) {
 }
 
 //TESTME
-Complex cSqrt(Complex input) {
+public Complex cSqrt(Complex input) {
   double r = Math.sqrt(input.getMagnitude());
   double theta = cPhase(input)/2;
   return complex(r*Math.cos(theta), r*Math.sin(theta));
 }
 
 //TESTME
-Complex normalize(Complex c) {
+public Complex normalize(Complex c) {
   return complex(c.r /= c.getMagnitude(), c.i /= c.getMagnitude());
 }
 
