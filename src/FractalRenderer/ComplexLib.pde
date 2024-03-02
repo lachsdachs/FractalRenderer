@@ -16,7 +16,6 @@
  Written by lachsdachs.
 */
 
-
 //base class representing complex numbers. Implements some operators/functions for convenience.
 public class Complex {
   public double r; //real part
@@ -81,7 +80,7 @@ public class Complex {
   public Complex getConjugate() {
     return complex(r, -i);
   }
-
+
   public Complex getReciprocal() {
     double s = r*r + i*i;
     return complex(r/s, -i/s);
@@ -107,10 +106,6 @@ public class Complex {
     }
   }
 }
-
-
-
-
 
 public final Complex cZero = new Complex(0, 0);
 
@@ -147,7 +142,7 @@ public Complex cReciprocal(Complex c) {
 public Complex cAdd(Complex a, Complex b) {
   return complex(a.r+b.r, a.i+b.i);
 }
-
+
 public Complex cAdd(Complex a, Complex b, Complex c) {
   return complex(a.r+b.r+c.r, a.i+b.i+c.i);
 }
@@ -222,10 +217,6 @@ public Complex cSqrt(Complex input) {
 public Complex normalize(Complex c) {
   return complex(c.r /= c.getMagnitude(), c.i /= c.getMagnitude());
 }
-
-
-
-
 
 //--------------TESTING ONLY--------------//
 
