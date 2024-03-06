@@ -15,7 +15,6 @@ void setup() {
 }
 
 
-
 int m = 0;
 PImage buffer;
 boolean hasChanged = true;
