@@ -47,7 +47,7 @@ public class Complex {
     return "("+r+" + "+i+"i)";
   }
 
-  //literally no idea if this even works, no time to test it
+  //this works apparently
   public void normalize() {
     r /= getMagnitude();
     i /= getMagnitude();
